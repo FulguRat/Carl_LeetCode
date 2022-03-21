@@ -5,47 +5,38 @@ using namespace std;
 
 int main(void)
 {
-    int n = 3;
-    vector<vector<int>> matrix(3, vector<int>(3, 0));
+    int n = 2;
+    vector<vector<int>> matrix(n, vector<int>(n, 0));
 
     int element = 1;
 
-    int rowMin;
-    int rowMax;
-    int colMin;
-    int colMax;
+    int offset = 0;
 
-    rowMin = 0;
-    rowMax = n;
-    colMin = 0;
-    colMax = n;
-
-    while (colMin < colMax)
+    while (offset < n - 1 - offset)
     {
-        cout << "?";
-        for (int i = colMin; i < colMax; i++)
+        for (int i = offset; i < n - 1 - offset; i++)
         {
-            matrix[rowMin][i - 1] = element++;
+            matrix[offset][i] = element++;
         }
-        colMin++;
+        for (int i = offset; i < n - 1 - offset; i++)
+        {
+            matrix[i][n - 1 - offset] = element++;
+        }
+        for (int i = n - 1 - offset; i > offset; i--)
+        {
+            matrix[n - 1 - offset][i] = element++;
+        }
+        for (int i = n - 1 - offset; i > offset; i--)
+        {
+            matrix[i][offset] = element++;
+        }
 
-        for (int i = rowMin; i < rowMax; i++)
-        {
-            matrix[i][colMax - 1] = element++;
-        }
-        rowMin++;
+        offset++;
+    }
 
-        for (int i = colMax - 1; i >= colMin; i--)
-        {
-            matrix[rowMax][i + 1] = element++;
-        }
-        colMax--;
-
-        for (int i = rowMax - 1; i >= rowMin; i--)
-        {
-            matrix[i][colMin + 1] = element++;
-        }
-        rowMax--;
+    if (offset == n - 1 - offset)
+    {
+        matrix[offset][offset] = element;
     }
 
     for (int y = 0; y < n; y++)
