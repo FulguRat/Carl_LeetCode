@@ -11,18 +11,36 @@ public:
 
     void push(int x)
     {
+        stackIn.push(x);
     }
 
     int pop()
     {
+        if (stackOut.empty())
+        {
+            while (!stackIn.empty())
+            {
+                stackOut.push(stackIn.top());
+                stackIn.pop();
+            }
+        }
+
+        int element = stackOut.top();
+        stackOut.pop();
+        return element;
     }
 
     int peek()
     {
+        int element = this->pop();
+        stackOut.push(element);
+
+        return element;
     }
 
     bool empty()
     {
+        return stackIn.empty() && stackOut.empty();
     }
 
 private:
