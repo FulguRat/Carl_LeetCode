@@ -35,11 +35,9 @@ void preOrderTraversal(TreeNode* currentNode, vector<int>& array)
 void inOrderTraversal(TreeNode* currentNode, vector<int>& array)
 {
     stack<TreeNode*> nodeStack;
-    TreeNode* tmpNode;
+    TreeNode* tmpNode = currentNode;
 
-    nodeStack.push(currentNode);
-    tmpNode = nodeStack.top();
-    while (!nodeStack.empty())
+    while (tmpNode != nullptr || !nodeStack.empty())
     {
         if (tmpNode != nullptr)
         {
@@ -48,11 +46,32 @@ void inOrderTraversal(TreeNode* currentNode, vector<int>& array)
         }
         else
         {
-            
-            array.push_back(nodeStack.top()->val);
+            tmpNode = nodeStack.top();
+            nodeStack.pop();
+            array.push_back(tmpNode->val);
             tmpNode = tmpNode->right;
         }
     }
+}
+
+//-- Post-order
+void postOrderTraversal(TreeNode* currentNode, vector<int>& array)
+{
+    stack<TreeNode*> nodeStack;
+    TreeNode* tmpNode;
+
+    nodeStack.push(currentNode);
+    while (!nodeStack.empty())
+    {
+        tmpNode = nodeStack.top();
+        nodeStack.pop();
+
+        array.push_back(tmpNode->val);
+        if (tmpNode->left ) { nodeStack.push(tmpNode->left ); }
+        if (tmpNode->right) { nodeStack.push(tmpNode->right); }
+    }
+
+    reverse(array.begin(), array.end());
 }
 
 int main(void)
@@ -77,7 +96,7 @@ int main(void)
     }
 
     vector<int> result;
-    inOrderTraversal(nodes[0], result);
+    postOrderTraversal(nodes[0], result);
 
     for (auto i : result)
     {
