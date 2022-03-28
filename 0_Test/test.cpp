@@ -2,16 +2,19 @@
 
 using namespace std;
 
-char* fun(void)
+int c = 4;
+
+typedef union
 {
-    char array[2] = { 0, 1 };
-    return array;
-}
+    int a;
+    int& b = c;
+}Test;
+
 
 int main(void)
 {
-    char* arr = fun();
-    cout << arr[1] << endl;
+    Test test;
+    cout << test.b;
 
     return 0;
 }
