@@ -60,9 +60,9 @@ int main(void)
     // Construct binary tree
     for (int i = 0; i < num ; i++)
     {
-        nodes[i] -> val = treeArray[i];
-        if (i * 2 + 1 < num) { nodes[i] -> left  = nodes[i * 2 + 1]; }
-        if (i * 2 + 2 < num) { nodes[i] -> right = nodes[i * 2 + 2]; }
+        nodes[i]->val = treeArray[i];
+        if (i * 2 + 1 < num) { nodes[i]->left  = nodes[i * 2 + 1]; }
+        if (i * 2 + 2 < num) { nodes[i]->right = nodes[i * 2 + 2]; }
     }
 
     vector<int> result;
