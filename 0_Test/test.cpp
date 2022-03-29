@@ -2,16 +2,15 @@
 
 using namespace std;
 
-char* fun(void)
+void fun(int& a)
 {
-    char array[2] = { 0, 1 };
-    return array;
+    cout << &a << endl;
 }
 
 int main(void)
 {
-    char* arr = fun();
-    cout << arr[1] << endl;
+    int testVal;
+    cout << &testVal << endl;
 
     return 0;
 }
